@@ -24,7 +24,7 @@ function Login() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/login",
+        "https://student-auth-system-gtb0.onrender.com/api/login",
         formData
       );
 
@@ -37,7 +37,9 @@ function Login() {
       alert("Login Successful");
       navigate("/dashboard");
     } catch (error) {
-      alert(error.response.data.message);
+      alert(
+        error.response?.data?.message || "Something went wrong"
+      );
     }
   };
 

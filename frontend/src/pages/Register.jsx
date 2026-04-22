@@ -25,12 +25,17 @@ function Register() {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:5000/api/register", formData);
+      await axios.post(
+        "https://student-auth-system-gtb0.onrender.com/api/register",
+        formData
+      );
 
       alert("Registration Successful");
       navigate("/login");
     } catch (error) {
-      alert(error.response.data.message);
+      alert(
+        error.response?.data?.message || "Something went wrong"
+      );
     }
   };
 
