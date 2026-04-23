@@ -8,11 +8,10 @@ function Register() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    password: "",
-    course: ""
+    password: ""
   });
 
-  const { name, email, password, course } = formData;
+  const { name, email, password } = formData;
 
   const handleChange = (e) => {
     setFormData({
@@ -70,16 +69,6 @@ function Register() {
           placeholder="Enter Password"
           className="form-control mb-3"
           value={password}
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          type="text"
-          name="course"
-          placeholder="Enter Course"
-          className="form-control mb-3"
-          value={course}
           onChange={handleChange}
           required
         />
