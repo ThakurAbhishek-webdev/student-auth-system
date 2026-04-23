@@ -1,347 +1,3 @@
-// // const express = require("express");
-// // const mongoose = require("mongoose");
-// // const bcrypt = require("bcryptjs");
-// // const jwt = require("jsonwebtoken");
-// // const cors = require("cors");
-// // const dotenv = require("dotenv");
-
-// // const Student = require("./models/Student");
-// // const auth = require("./middleware/auth");
-
-// // dotenv.config();
-
-// // const app = express();
-
-// // app.use(express.json());
-// // app.use(cors());
-
-// // /*
-// // MongoDB Connection
-// // */
-// // mongoose.connect(process.env.MONGO_URI)
-// // .then(() => console.log("MongoDB Connected"))
-// // .catch((err) => console.log(err));
-
-// // /*
-// // REGISTER API
-// // POST /api/register
-// // */
-// // app.post("/api/register", async (req, res) => {
-// //     try {
-// //         const { name, email, password, course } = req.body;
-
-// //         let student = await Student.findOne({ email });
-
-// //         if (student) {
-// //             return res.status(400).json({
-// //                 message: "Email already exists"
-// //             });
-// //         }
-
-// //         const hashedPassword = await bcrypt.hash(password, 10);
-
-// //         student = new Student({
-// //             name,
-// //             email,
-// //             password: hashedPassword,
-// //             course
-// //         });
-
-// //         await student.save();
-
-// //         res.json({
-// //             message: "Student Registered Successfully"
-// //         });
-
-// //     } catch (error) {
-// //         res.status(500).json({
-// //             message: error.message
-// //         });
-// //     }
-// // });
-
-// // /*
-// // LOGIN API
-// // POST /api/login
-// // */
-// // app.post("/api/login", async (req, res) => {
-// //     try {
-// //         const { email, password } = req.body;
-
-// //         const student = await Student.findOne({ email });
-
-// //         if (!student) {
-// //             return res.status(400).json({
-// //                 message: "Invalid Credentials"
-// //             });
-// //         }
-
-// //         const isMatch = await bcrypt.compare(password, student.password);
-
-// //         if (!isMatch) {
-// //             return res.status(400).json({
-// //                 message: "Invalid Credentials"
-// //             });
-// //         }
-
-// //         const token = jwt.sign(
-// //             { id: student._id },
-// //             process.env.JWT_SECRET,
-// //             { expiresIn: "1d" }
-// //         );
-
-// //         res.json({
-// //             token,
-// //             student
-// //         });
-
-// //     } catch (error) {
-// //         res.status(500).json({
-// //             message: error.message
-// //         });
-// //     }
-// // });
-
-// // /*
-// // UPDATE PASSWORD
-// // PUT /api/update-password
-// // */
-// // app.put("/api/update-password", auth, async (req, res) => {
-// //     try {
-// //         const { oldPassword, newPassword } = req.body;
-
-// //         const student = await Student.findById(req.student.id);
-
-// //         const isMatch = await bcrypt.compare(
-// //             oldPassword,
-// //             student.password
-// //         );
-
-// //         if (!isMatch) {
-// //             return res.status(400).json({
-// //                 message: "Old password incorrect"
-// //             });
-// //         }
-
-// //         student.password = await bcrypt.hash(newPassword, 10);
-
-// //         await student.save();
-
-// //         res.json({
-// //             message: "Password Updated Successfully"
-// //         });
-
-// //     } catch (error) {
-// //         res.status(500).json({
-// //             message: error.message
-// //         });
-// //     }
-// // });
-
-// // /*
-// // UPDATE COURSE
-// // PUT /api/update-course
-// // */
-// // app.put("/api/update-course", auth, async (req, res) => {
-// //     try {
-// //         const { course } = req.body;
-
-// //         const student = await Student.findById(req.student.id);
-
-// //         student.course = course;
-
-// //         await student.save();
-
-// //         res.json({
-// //             message: "Course Updated Successfully"
-// //         });
-
-// //     } catch (error) {
-// //         res.status(500).json({
-// //             message: error.message
-// //         });
-// //     }
-// // });
-
-// // app.listen(process.env.PORT, () => {
-// //     console.log(`Server running on port ${process.env.PORT}`);
-// // });
-
-// const express = require("express");
-// const mongoose = require("mongoose");
-// const bcrypt = require("bcryptjs");
-// const jwt = require("jsonwebtoken");
-// const cors = require("cors");
-// const dotenv = require("dotenv");
-
-// const Student = require("./models/Student");
-// const auth = require("./middleware/auth");
-
-// dotenv.config();
-
-// const app = express();
-
-// app.use(express.json());
-// app.use(cors());
-
-// /*
-// MongoDB Connection
-// */
-// mongoose.connect(process.env.MONGO_URI)
-// .then(() => console.log("MongoDB Connected"))
-// .catch((err) => console.log(err));
-
-// /*
-// HOME ROUTE
-// */
-// app.get("/", (req, res) => {
-//     res.send("Student Auth System Backend Running Successfully 🚀");
-// });
-
-// /*
-// REGISTER API
-// POST /api/register
-// */
-// app.post("/api/register", async (req, res) => {
-//     try {
-//         const { name, email, password, course } = req.body;
-
-//         let student = await Student.findOne({ email });
-
-//         if (student) {
-//             return res.status(400).json({
-//                 message: "Email already exists"
-//             });
-//         }
-
-//         const hashedPassword = await bcrypt.hash(password, 10);
-
-//         student = new Student({
-//             name,
-//             email,
-//             password: hashedPassword,
-//             course
-//         });
-
-//         await student.save();
-
-//         res.json({
-//             message: "Student Registered Successfully"
-//         });
-
-//     } catch (error) {
-//         res.status(500).json({
-//             message: error.message
-//         });
-//     }
-// });
-
-// /*
-// LOGIN API
-// POST /api/login
-// */
-// app.post("/api/login", async (req, res) => {
-//     try {
-//         const { email, password } = req.body;
-
-//         const student = await Student.findOne({ email });
-
-//         if (!student) {
-//             return res.status(400).json({
-//                 message: "Invalid Credentials"
-//             });
-//         }
-
-//         const isMatch = await bcrypt.compare(password, student.password);
-
-//         if (!isMatch) {
-//             return res.status(400).json({
-//                 message: "Invalid Credentials"
-//             });
-//         }
-
-//         const token = jwt.sign(
-//             { id: student._id },
-//             process.env.JWT_SECRET,
-//             { expiresIn: "1d" }
-//         );
-
-//         res.json({
-//             token,
-//             student
-//         });
-
-//     } catch (error) {
-//         res.status(500).json({
-//             message: error.message
-//         });
-//     }
-// });
-
-// /*
-// UPDATE PASSWORD
-// PUT /api/update-password
-// */
-// app.put("/api/update-password", auth, async (req, res) => {
-//     try {
-//         const { oldPassword, newPassword } = req.body;
-
-//         const student = await Student.findById(req.student.id);
-
-//         const isMatch = await bcrypt.compare(
-//             oldPassword,
-//             student.password
-//         );
-
-//         if (!isMatch) {
-//             return res.status(400).json({
-//                 message: "Old password incorrect"
-//             });
-//         }
-
-//         student.password = await bcrypt.hash(newPassword, 10);
-
-//         await student.save();
-
-//         res.json({
-//             message: "Password Updated Successfully"
-//         });
-
-//     } catch (error) {
-//         res.status(500).json({
-//             message: error.message
-//         });
-//     }
-// });
-
-// /*
-// UPDATE COURSE
-// PUT /api/update-course
-// */
-// app.put("/api/update-course", auth, async (req, res) => {
-//     try {
-//         const { course } = req.body;
-
-//         const student = await Student.findById(req.student.id);
-
-//         student.course = course;
-
-//         await student.save();
-
-//         res.json({
-//             message: "Course Updated Successfully"
-//         });
-
-//     } catch (error) {
-//         res.status(500).json({
-//             message: error.message
-//         });
-//     }
-// });
-
-// app.listen(process.env.PORT, () => {
-//     console.log(`Server running on port ${process.env.PORT}`);
-// });
 const express = require("express");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
@@ -350,6 +6,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 
 const Student = require("./models/Student");
+const Grievance = require("./models/Grievance");
 const auth = require("./middleware/auth");
 
 dotenv.config();
@@ -363,14 +20,14 @@ app.use(cors());
 MongoDB Connection
 */
 mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log("MongoDB Connected"))
-.catch((err) => console.log(err));
+    .then(() => console.log("MongoDB Connected"))
+    .catch((err) => console.log(err));
 
 /*
 HOME ROUTE
 */
 app.get("/", (req, res) => {
-    res.send("Student Auth System Backend Running Successfully 🚀");
+    res.send("Student Grievance Management System Backend Running Successfully 🚀");
 });
 
 /*
@@ -379,7 +36,7 @@ POST /api/register
 */
 app.post("/api/register", async (req, res) => {
     try {
-        const { name, email, password, course } = req.body;
+        const { name, email, password } = req.body;
 
         let student = await Student.findOne({ email });
 
@@ -394,8 +51,7 @@ app.post("/api/register", async (req, res) => {
         student = new Student({
             name,
             email,
-            password: hashedPassword,
-            course
+            password: hashedPassword
         });
 
         await student.save();
@@ -454,32 +110,24 @@ app.post("/api/login", async (req, res) => {
 });
 
 /*
-UPDATE PASSWORD
-PUT /api/update-password
+SUBMIT GRIEVANCE API
+POST /api/grievances
 */
-app.put("/api/update-password", auth, async (req, res) => {
+app.post("/api/grievances", auth, async (req, res) => {
     try {
-        const { oldPassword, newPassword } = req.body;
+        const { title, description, category } = req.body;
 
-        const student = await Student.findById(req.student.id);
+        const grievance = new Grievance({
+            title,
+            description,
+            category
+        });
 
-        const isMatch = await bcrypt.compare(
-            oldPassword,
-            student.password
-        );
-
-        if (!isMatch) {
-            return res.status(400).json({
-                message: "Old password incorrect"
-            });
-        }
-
-        student.password = await bcrypt.hash(newPassword, 10);
-
-        await student.save();
+        await grievance.save();
 
         res.json({
-            message: "Password Updated Successfully"
+            message: "Grievance Submitted Successfully",
+            grievance
         });
 
     } catch (error) {
@@ -490,21 +138,101 @@ app.put("/api/update-password", auth, async (req, res) => {
 });
 
 /*
-UPDATE COURSE
-PUT /api/update-course
+VIEW ALL GRIEVANCES API
+GET /api/grievances
 */
-app.put("/api/update-course", auth, async (req, res) => {
+app.get("/api/grievances", auth, async (req, res) => {
     try {
-        const { course } = req.body;
+        const grievances = await Grievance.find();
 
-        const student = await Student.findById(req.student.id);
+        res.json(grievances);
 
-        student.course = course;
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+});
 
-        await student.save();
+/*
+SEARCH GRIEVANCE API
+GET /api/grievances/search?title=xyz
+*/
+app.get("/api/grievances/search", auth, async (req, res) => {
+    try {
+        const { title } = req.query;
+
+        const grievances = await Grievance.find({
+            title: { $regex: title, $options: "i" }
+        });
+
+        res.json(grievances);
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+});
+
+/*
+VIEW GRIEVANCE BY ID
+GET /api/grievances/:id
+*/
+app.get("/api/grievances/:id", auth, async (req, res) => {
+    try {
+        const grievance = await Grievance.findById(req.params.id);
+
+        res.json(grievance);
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+});
+
+/*
+UPDATE GRIEVANCE
+PUT /api/grievances/:id
+*/
+app.put("/api/grievances/:id", auth, async (req, res) => {
+    try {
+        const { title, description, category, status } = req.body;
+
+        const grievance = await Grievance.findByIdAndUpdate(
+            req.params.id,
+            {
+                title,
+                description,
+                category,
+                status
+            },
+            { new: true }
+        );
 
         res.json({
-            message: "Course Updated Successfully"
+            message: "Grievance Updated Successfully",
+            grievance
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+});
+
+/*
+DELETE GRIEVANCE
+DELETE /api/grievances/:id
+*/
+app.delete("/api/grievances/:id", auth, async (req, res) => {
+    try {
+        await Grievance.findByIdAndDelete(req.params.id);
+
+        res.json({
+            message: "Grievance Deleted Successfully"
         });
 
     } catch (error) {
